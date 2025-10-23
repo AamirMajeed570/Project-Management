@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest --config jest.config.js --runInBand",
     "dev": "nodemon index.ts",
-    "seed": "ts-node src/seed/seed.ts"
+    "seed": "ts-node src/seed/seed.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
   },
   "keywords": [],
   "author": "",
