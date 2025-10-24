@@ -4,11 +4,16 @@ import dotenv from "dotenv";
 import User from "../models/User";
 import Project from "../models/Project";
 import Task from "../models/Task";
-
 dotenv.config();
 
+const MONGO_URI:string = process.env.MONGO_URI!;
+
 async function seed() {
-  await mongoose.connect("mongodb+srv://aamirmajeedkhan570_db_user:Fb4CtLYv9d8n6V3F@cluster0.4tdncf2.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0");
+  await mongoose.connect(MONGO_URI!).then(() => {
+    console.log("MongoDB connected successfully");
+  }).catch((err) => {
+    console.error("MongoDB connection error:", err);
+  });
   console.log("Connected to MongoDB");
 
   await User.deleteMany({});
