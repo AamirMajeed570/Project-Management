@@ -1,6 +1,9 @@
 # Project-Management
 # Project Management App
 
+# This is the demo link of the project.
+# https://www.loom.com/share/d4da0700d03d4e258988db433df3a2e5?sid=4da32dd7-3c58-4586-9682-b7b2bc3b21ca
+
 A full-stack **Project Management Application** built with **MERN stack** (MongoDB, Express, React, Node.js), fully typed with **TypeScript**, and Dockerized for easy deployment. The app allows users to create, update, delete, and manage projects and their associated tasks.
 
 ---
