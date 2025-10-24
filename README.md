@@ -6,6 +6,20 @@
 
 A full-stack **Project Management Application** built with **MERN stack** (MongoDB, Express, React, Node.js), fully typed with **TypeScript**, and Dockerized for easy deployment. The app allows users to create, update, delete, and manage projects and their associated tasks.
 
+# 🧪 Seed Database
+Here is a step by step to check seed script
+# MONGO_URI=your_mongodb_connection_string
+# Install Dependencies
+bash
+   cd backend
+   npm install
+# Run seed Script
+bash
+   npm run seed
+
+output
+   MongoDb connected Succesfully
+
 ---
 
 ## Table of Contents
