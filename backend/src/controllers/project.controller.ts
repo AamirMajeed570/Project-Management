@@ -28,15 +28,50 @@ export const createProject = async (req: AuthRequest, res: Response) => {
 }
 
 export const listProjects = async (req: AuthRequest, res: Response) => {
-    const projects = await Project.find({ owner: req.user!.id }).sort({
-        createdAt: -1
-    })
+  try {
+    const { page = 1, limit = 10, status,search = "", name } = req.query;
+
+    // Build the filter object
+    const filter: any = { owner: req.user!.id };
+    if (search) {
+      filter.title = { $regex: search, $options: "i" }; // case-insensitive search
+    }
+    if (status) filter.status = status;       // filter by project status
+    if (name) filter.name = { $regex: name, $options: 'i' }; // case-insensitive search by name
+
+    // Convert page and limit to numbers
+    const pageNumber = parseInt(page as string, 10);
+    const limitNumber = parseInt(limit as string, 10);
+
+    // Fetch total count for pagination
+    const total = await Project.countDocuments(filter);
+
+    // Fetch paginated and sorted projects
+    const projects = await Project.find(filter)
+      .sort({ createdAt: -1 })
+      .skip((pageNumber - 1) * limitNumber)
+      .limit(limitNumber);
+
     res.status(200).json({
-        message: "Projects Fetched Succesfully",
-        success: true,
-        data: projects
-    })
-}
+      message: "Projects fetched successfully",
+      success: true,
+      data: projects,
+      pagination: {
+        total,
+        page: pageNumber,
+        limit: limitNumber,
+        totalPages: Math.ceil(total / limitNumber),
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Failed to fetch projects",
+      success: false,
+    });
+  }
+};
+
 
 export const getProject = async (req: AuthRequest, res: Response) => {
     const { id } = req.params;
