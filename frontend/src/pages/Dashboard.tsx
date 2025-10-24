@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8000/api/v1";
+const API_URL = process.env.REACT_APP_API_URL!
 
 const Dashboard: React.FC = () => {
   const [projects, setProjects] = useState<any[]>([]);
